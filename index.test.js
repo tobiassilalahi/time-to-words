@@ -1,34 +1,33 @@
-const  { convertTimeToWords } = require('./index');
+const {convertTimeToWords} = require('./index.js')
 
-describe('Time to words', () => {
+describe('convertTimeToWords', () => {
   it('Handles midnight', () => {
-    const timeInWords = convertTimeToWords('0:00');
-    expect(timeInWords).toBe('midnight');
+    expect(convertTimeToWords('0:00')).toBe('midnight');
   });
 
   it('Handles 30 - 8:30', () => {
-    const timeInWords = convertTimeToWords('8:30');
-    expect(timeInWords).toBe('half past eight');
+    expect(convertTimeToWords('8:30')).toBe('half past eight');
   });
 
-  it('Handles times after 30 mins - 2:45', () => {
-    const timeInWords = convertTimeToWords('2:45');
-    expect(timeInWords).toBe('quarter to three');
+  it('Handles times after 30 min - 2:33', () => {
+    expect(convertTimeToWords('2:33')).toBe('twenty seven to three');
   });
 
-  it('Handles times before 30 mins - 2:23', () => {
-    const timeInWords = convertTimeToWords('2:23');
-    expect(timeInWords).toBe('twenty-three past two');
+  it('Handles times before 30 min - 2:26', () => {
+    expect(convertTimeToWords('2:26')).toBe('twenty six past two');
   });
 
-  it('Handles times after 30 mins non quarter - 2:48', () => {
-    const timeInWords = convertTimeToWords('2:48');
-    expect(timeInWords).toBe('twelve to three');
+  it(`Handles o'clock 2:00`, () => {
+    expect(convertTimeToWords('2:00')).toBe(`two o'clock`);
   });
 
-  it('Handles o clock - 4:00', () => {
-    const timeInWords = convertTimeToWords('4:00');
-    expect(timeInWords).toBe("four o'clock");
+  it('Handles a quarter before 30 5:15', () => {
+    expect(convertTimeToWords('5:15')).toBe('quarter past five');
   });
+
+  it('Handles a quarter after 30 9:45', () => {
+    expect(convertTimeToWords('9:45')).toBe('quarter to ten');
+  })
 
 });
+
